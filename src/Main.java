@@ -15,7 +15,7 @@ import java.util.stream.Stream;
 
 public class Main {
     public static void main(String[] args) throws IOException, InterruptedException, NoSuchAlgorithmException {
-        String filename = ".\\blockchain";
+        String filename = ".\\data\\blockchain";
         try (FileOutputStream fos = new FileOutputStream(filename, false);
              ObjectOutputStream oos = new ObjectOutputStream(fos)) {
             int zerosCount = 0;
