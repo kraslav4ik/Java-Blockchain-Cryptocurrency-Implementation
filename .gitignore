@@ -1,5 +1,5 @@
 # Project exclude paths
-/.gradle/
-/Blockchain/task/build/
-/Blockchain/task/out/
-/Blockchain/task/out/production/classes/
+/out
+/data/blockchain
+/Blockchain.iml
+/.idea
