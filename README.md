@@ -10,7 +10,7 @@ In this program, `multithreading` is using for implementing users and miners act
 
 Features:
 * Integrity of the blockchain and its validation after creation
-* Controlling the number of hash's leading zeros
+* Controlling the number of hash's leading zeros based on creation time
 * Magic numbers as a proof of work for each block
 * BlockChain validation after creating
 * Transactions between users with digital signatures, public & private keys
