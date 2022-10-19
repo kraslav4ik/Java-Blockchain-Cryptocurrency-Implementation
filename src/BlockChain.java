@@ -18,6 +18,7 @@ public class BlockChain implements Serializable {
     private final transient HashGenerator hashGenerator;
     private final List<User> users;
     private final transient ObjectOutputStream oos;
+    private String lastBlockInfo;
 
     public BlockChain(int zerosCount, ObjectOutputStream oos) {
         this.currentId = 0;
@@ -37,7 +38,7 @@ public class BlockChain implements Serializable {
         this.prevHash = block.getHash();
         ++this.currentId;
         this.blocks.add(block);
-        this.printAndUpdateZeros();
+        this.updateZeros();
         this.oos.writeObject(this);
         return AddBlockStatus.ADDED;
     }
@@ -59,24 +60,28 @@ public class BlockChain implements Serializable {
         return true;
     }
 
+    public String getLastBlockInfo() {
+        return this.lastBlockInfo;
+    }
 
-    private void printAndUpdateZeros() {
+
+    private void updateZeros() {
         Block lastBlock = this.blocks.get(this.currentId - 1);
-        System.out.print(lastBlock);
+        this.lastBlockInfo = lastBlock.toHTML();
         long timeForLastBlock = lastBlock.getGenerationTime();
         if (timeForLastBlock  < 1) {
             this.zerosCount++;
             this.hashGenerator.setZerosCount(this.zerosCount);
-            System.out.printf("N was increased to %d\n\n", this.zerosCount);
+            this.lastBlockInfo += String.format("N was increased to %d</html>", this.zerosCount);
             return;
         }
         if (timeForLastBlock  > 10) {
-            System.out.print("N was decreased by 1\n\n");
+            this.lastBlockInfo += "N was decreased by 1</html>";
             this.zerosCount--;
             this.hashGenerator.setZerosCount(this.zerosCount);
             return;
         }
-        System.out.println("N stays the same\n\n");
+        this.lastBlockInfo += "N stays the same\n\n</html>";
     }
 
     static class BlockChainState {
@@ -128,5 +133,9 @@ public class BlockChain implements Serializable {
 
     public List<User> getUsers() {
         return users;
+    }
+
+    public synchronized List<Transaction> getTransactions() {
+        return transactions;
     }
 }

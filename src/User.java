@@ -13,9 +13,9 @@ public class User {
     protected final PublicKey publicKey;
     protected final BlockChain blockChain;
 
-    public User(String name, KeyPair keyPair, BlockChain blockChain) {
+    public User(String name, KeyPair keyPair, BlockChain blockChain, int money) {
         this.name = name;
-        this.money = 100;
+        this.money = money;
         this.privateKey = keyPair.getPrivate();
         this.publicKey = keyPair.getPublic();
         this.blockChain = blockChain;
@@ -47,6 +47,7 @@ public class User {
                 Thread.sleep(5000);
                 continue;
             }
+            if (this.blockChain.getTransactions().size() == 10) { break; }
             int transactionSum = random.nextInt(this.money / 2) + 1;
             List<User> users = new ArrayList<>(this.blockChain.getUsers());
             users.remove(this);
