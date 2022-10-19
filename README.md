@@ -6,6 +6,8 @@ Here you're able to create your pool of users, your own miners, which will inter
 
 In this program, `multithreading` is using for implementing users and miners activities.
 
+!(https://github.com/kraslav4ik/Java-Blockchain-Cryptocurrency-Implementation/blob/main/img/2022-10-19_23-25-04.png)
+
 Features:
 * Integrity of the blockchain and its validation after creation
 * Controlling the number of hash's leading zeros
