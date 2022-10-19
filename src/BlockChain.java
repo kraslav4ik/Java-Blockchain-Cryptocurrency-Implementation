@@ -72,16 +72,16 @@ public class BlockChain implements Serializable {
         if (timeForLastBlock  < 1) {
             this.zerosCount++;
             this.hashGenerator.setZerosCount(this.zerosCount);
-            this.lastBlockInfo += String.format("N was increased to %d</html>", this.zerosCount);
+            this.lastBlockInfo += String.format("Number of hash leading zeros was increased to %d</html>", this.zerosCount);
             return;
         }
         if (timeForLastBlock  > 10) {
-            this.lastBlockInfo += "N was decreased by 1</html>";
+            this.lastBlockInfo += "Number of hash leading zeros was decreased by 1</html>";
             this.zerosCount--;
             this.hashGenerator.setZerosCount(this.zerosCount);
             return;
         }
-        this.lastBlockInfo += "N stays the same\n\n</html>";
+        this.lastBlockInfo += "Number of hash leading zeros stays the same\n\n</html>";
     }
 
     static class BlockChainState {

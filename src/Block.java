@@ -46,11 +46,11 @@ public class Block implements Serializable {
     }
 
     public String toHTML() {
-        return String.format("<html>Block:<br>Created by: %s<br>%s gets %d VC<br>Id: %d<br>Timestamp: %d<br>Magic number: %d<br>Hash of the previous block:<br>%s<br>Hash of the block:<br>%s<br>Block data:%sBlock was generating for %d seconds<br>",
+        return String.format("<html><h2>Block #%s</h2><br>Created by: %s<br>%s gets %d VC<br>Timestamp: %d<br>Magic number: %d<br>Hash of the previous block:<br>%s<br>Hash of the block:<br>%s<br>Block data:%sBlock was generating for %d seconds<br>",
+                this.getId(),
                 this.miner.getName(),
                 this.miner.getName(),
                 this.miner.getAwardForMining(),
-                this.getId(),
                 this.getTimestamp(),
                 this.getMagicNumber(),
                 this.getPrevHash(),

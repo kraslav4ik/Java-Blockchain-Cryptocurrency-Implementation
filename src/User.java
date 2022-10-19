@@ -53,7 +53,6 @@ public class User {
             users.remove(this);
             User to = users.get(random.nextInt(users.size()));
             this.makeTransaction(to, transactionSum);
-            Thread.sleep(1000);
         }
     }
 

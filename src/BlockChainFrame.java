@@ -7,11 +7,12 @@ import java.awt.*;
 
 public class BlockChainFrame extends JFrame {
     private JPanel blocksPanel;
+    volatile private GridBagConstraints constraints;
 
     public BlockChainFrame() {
         super("BlockChain");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(1000, 600);
+        setSize(1000, 800);
         setLocationRelativeTo(null);
 
         this.initComponents();
@@ -19,28 +20,38 @@ public class BlockChainFrame extends JFrame {
         setVisible(true);
     }
 
-    private void initComponents() {
+    synchronized private void initComponents() {
+        this.blocksPanel = new JPanel();
+        GridBagLayout gridBagLayout = new GridBagLayout();
+        this.constraints = new GridBagConstraints();
+        this.constraints.fill = GridBagConstraints.VERTICAL;
+        this.constraints.gridy = 0;
+        this.constraints.gridx = 0;
 
-
-//        listScroller.setPreferredSize(new Dimension(250, 80));
-         this.blocksPanel = new JPanel(new GridLayout(1, 0));
-
+        this.blocksPanel.setLayout(gridBagLayout);
         JScrollPane listScroller = new JScrollPane(this.blocksPanel);
-        listScroller.setSize(1000, 500);
-        listScroller.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
-//        listScroller.setCorner(JScrollPane.LOWER_RIGHT_CORNER ,new JLabel(""));
+        listScroller.setSize(1000, 600);
+        listScroller.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         listScroller.setBorder(new EmptyBorder(new Insets(10, 10, 10, 25)));
         add(listScroller);
-
     }
 
     public void addBlockToFrame(String blockText) {
-        JLabel block = new JLabel(blockText);
-        block.setBackground(new Color(75, 255, 255));
-        block.setBorder(new LineBorder(Color.BLACK, 5));
-        block.setAlignmentY(Component.TOP_ALIGNMENT);
-        this.blocksPanel.add(block);
-        this.blocksPanel.add(Box.createRigidArea(new Dimension(2, 0)));
+        JPanel panel = new JPanel();
+        JLabel block = new JLabel(blockText, SwingConstants.LEFT);
+        panel.setBackground(new Color(167, 255, 255));
+//        panel.setBorder(new LineBorder(Color.BLACK, 5));
+//        panel.setPreferredSize(new Dimension(300, 500));
+        panel.add(block);
+        JScrollPane scrollPane = new JScrollPane(panel);
+        scrollPane.setPreferredSize(new Dimension(300, 500));
+        scrollPane.setBorder(new LineBorder(Color.BLACK, 5));
+
+        this.blocksPanel.add(scrollPane, constraints);
+        this.blocksPanel.revalidate();
+        this.constraints.gridx += 1;
+        this.blocksPanel.add(new JLabel("--->"), constraints);
+        this.constraints.gridx += 1;
         this.blocksPanel.revalidate();
     }
 
